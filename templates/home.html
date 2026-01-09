@@ -1,0 +1,386 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Modern Blog - Latest articles on technology, design, and innovation">
+    <title>ModernBlog - Your Digital Magazine</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="{% static 'css/blog.css'}" rel="stylesheet">
+</head>
+<body>
+    <!-- Theme Toggle -->
+    <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle" style="z-index: 1050;">
+        <button class="btn btn-primary rounded-circle p-3" id="bd-theme" type="button" data-bs-toggle="dropdown">
+            <i class="fas fa-palette"></i>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end shadow">
+            <li><button class="dropdown-item" data-bs-theme-value="light"><i class="fas fa-sun me-2"></i>Light</button></li>
+            <li><button class="dropdown-item" data-bs-theme-value="dark"><i class="fas fa-moon me-2"></i>Dark</button></li>
+            <li><button class="dropdown-item active" data-bs-theme-value="auto"><i class="fas fa-circle-half-stroke me-2"></i>Auto</button></li>
+        </ul>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-3" href="#"><i class="fas fa-blog me-2"></i>ModernBlog</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#articles">Articles</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#categories">Categories</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                </ul>
+                <div class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search articles...">
+                    <button class="btn btn-outline-light me-2"><i class="fas fa-search"></i></button>
+                    <button class="btn btn-outline-light me-2">Login</button>
+                    <button class="btn btn-light">Register</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section bg-gradient text-white py-5">
+        <div class="container">
+            <div class="row align-items-center min-vh-50">
+                <div class="col-lg-6">
+                    <h1 class="display-4 fw-bold mb-4">Welcome to ModernBlog</h1>
+                    <p class="lead mb-4">Discover the latest insights in technology, design, and innovation. Join thousands of readers who trust us for quality content.</p>
+                    <div class="d-flex gap-3">
+                        <button class="btn btn-light btn-lg">Start Reading</button>
+                        <button class="btn btn-outline-light btn-lg">Learn More</button>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="hero-image text-center">
+                        <i class="fas fa-newspaper display-1 opacity-75"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section id="categories" class="py-4 bg-light">
+        <div class="container">
+            <div class="nav-scroller">
+                <nav class="nav nav-underline justify-content-center">
+                    <a class="nav-item nav-link link-body-emphasis active" href="#">World</a>
+                    <a class="nav-item nav-link link-body-emphasis" href="#">U.S.</a>
+                    <a class="nav-item nav-link link-body-emphasis" href="#">Technology</a>
+                    <a class="nav-item nav-link link-body-emphasis" href="#">Design</a>
+                    <a class="nav-item nav-link link-body-emphasis" href="#">Culture</a>
+                    <a class="nav-item nav-link link-body-emphasis" href="#">Business</a>
+                    <a class="nav-item nav-link link-body-emphasis" href="#">Politics</a>
+                    <a class="nav-item nav-link link-body-emphasis" href="#">Opinion</a>
+                    <a class="nav-item nav-link link-body-emphasis" href="#">Science</a>
+                    <a class="nav-item nav-link link-body-emphasis" href="#">Health</a>
+                    <a class="nav-item nav-link link-body-emphasis" href="#">Style</a>
+                    <a class="nav-item nav-link link-body-emphasis" href="#">Travel</a>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Articles -->
+    <section id="articles" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Featured Articles</h2>
+            <div class="row">
+                <div class="col-lg-8">
+                    <article class="card mb-4 shadow-sm">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <div class="card-img-placeholder bg-primary d-flex align-items-center justify-content-center h-100">
+                                    <i class="fas fa-image text-white fa-3x"></i>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <span class="badge bg-primary mb-2">Technology</span>
+                                    <h3 class="card-title">The Future of Web Development</h3>
+                                    <p class="card-text">Explore the latest trends and technologies shaping the future of web development, from AI integration to progressive web apps.</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <small class="text-muted">By <a href="#" class="text-decoration-none">John Doe</a> • Dec 15, 2024</small>
+                                        <a href="#" class="btn btn-outline-primary btn-sm">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <article class="card mb-4 shadow-sm">
+                                <div class="card-img-placeholder bg-success d-flex align-items-center justify-content-center" style="height: 200px;">
+                                    <i class="fas fa-palette text-white fa-2x"></i>
+                                </div>
+                                <div class="card-body">
+                                    <span class="badge bg-success mb-2">Design</span>
+                                    <h5 class="card-title">Modern UI/UX Principles</h5>
+                                    <p class="card-text">Learn the essential principles of modern user interface and experience design.</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <small class="text-muted">By <a href="#" class="text-decoration-none">Sarah Wilson</a> • Dec 12, 2024</small>
+                                        <a href="#" class="btn btn-outline-success btn-sm">Continue Reading</a>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="col-md-6">
+                            <article class="card mb-4 shadow-sm">
+                                <div class="card-img-placeholder bg-warning d-flex align-items-center justify-content-center" style="height: 200px;">
+                                    <i class="fas fa-rocket text-white fa-2x"></i>
+                                </div>
+                                <div class="card-body">
+                                    <span class="badge bg-warning mb-2">Innovation</span>
+                                    <h5 class="card-title">Startup Success Stories</h5>
+                                    <p class="card-text">Inspiring stories from successful startups and their journey to success.</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <small class="text-muted">By <a href="#" class="text-decoration-none">Mike Chen</a> • Dec 10, 2024</small>
+                                        <a href="#" class="btn btn-outline-warning btn-sm">Continue Reading</a>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="col-lg-4">
+                    <div class="card mb-4">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0"><i class="fas fa-fire me-2"></i>Trending Now</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="trending-item mb-3 pb-3 border-bottom">
+                                <h6 class="mb-1">AI Revolution in 2024</h6>
+                                <small class="text-muted">1.2k views</small>
+                            </div>
+                            <div class="trending-item mb-3 pb-3 border-bottom">
+                                <h6 class="mb-1">Sustainable Tech Solutions</h6>
+                                <small class="text-muted">980 views</small>
+                            </div>
+                            <div class="trending-item">
+                                <h6 class="mb-1">Remote Work Best Practices</h6>
+                                <small class="text-muted">756 views</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-4">
+                        <div class="card-header bg-info text-white">
+                            <h5 class="mb-0"><i class="fas fa-clock me-2"></i>Recent Posts</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex mb-3 pb-3 border-bottom">
+                                <div class="flex-shrink-0 me-3">
+                                    <div class="bg-primary rounded" style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;">
+                                        <i class="fas fa-image text-white"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h6 class="mb-1">Quantum Computing Breakthrough</h6>
+                                    <small class="text-muted">January 15, 2024</small>
+                                </div>
+                            </div>
+                            <div class="d-flex mb-3 pb-3 border-bottom">
+                                <div class="flex-shrink-0 me-3">
+                                    <div class="bg-success rounded" style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;">
+                                        <i class="fas fa-image text-white"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h6 class="mb-1">Web Design Trends 2024</h6>
+                                    <small class="text-muted">January 14, 2024</small>
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <div class="flex-shrink-0 me-3">
+                                    <div class="bg-warning rounded" style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;">
+                                        <i class="fas fa-image text-white"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h6 class="mb-1">Startup Success Guide</h6>
+                                    <small class="text-muted">January 13, 2024</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-4">
+                        <div class="card-header bg-secondary text-white">
+                            <h5 class="mb-0"><i class="fas fa-archive me-2"></i>Archives</h5>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled mb-0">
+                                <li><a href="#" class="text-decoration-none">January 2024</a></li>
+                                <li><a href="#" class="text-decoration-none">December 2023</a></li>
+                                <li><a href="#" class="text-decoration-none">November 2023</a></li>
+                                <li><a href="#" class="text-decoration-none">October 2023</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Pagination -->
+                    <nav class="d-flex justify-content-center mt-4" aria-label="Blog pagination">
+                        <div class="btn-group" role="group">
+                            <a class="btn btn-outline-primary rounded-pill me-2" href="#">← Older Posts</a>
+                            <a class="btn btn-outline-secondary rounded-pill disabled" aria-disabled="true">Newer Posts →</a>
+                        </div>
+                    </nav>
+
+                    <!-- Social Links -->
+                    <div class="card mb-4 mt-4">
+                        <div class="card-header bg-dark text-white">
+                            <h5 class="mb-0"><i class="fas fa-share-alt me-2"></i>Follow Us</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-around">
+                                <a href="#" class="btn btn-outline-dark btn-sm"><i class="fab fa-github"></i> GitHub</a>
+                                <a href="#" class="btn btn-outline-info btn-sm"><i class="fab fa-twitter"></i> Twitter</a>
+                                <a href="#" class="btn btn-outline-primary btn-sm"><i class="fab fa-facebook"></i> Facebook</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section id="categories" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Explore Categories</h2>
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                    <div class="card text-center h-100 shadow-sm">
+                        <div class="card-body">
+                            <i class="fas fa-laptop-code fa-3x text-primary mb-3"></i>
+                            <h5>Technology</h5>
+                            <p class="text-muted">Latest tech trends and innovations</p>
+                            <span class="badge bg-primary">24 Articles</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="card text-center h-100 shadow-sm">
+                        <div class="card-body">
+                            <i class="fas fa-paint-brush fa-3x text-success mb-3"></i>
+                            <h5>Design</h5>
+                            <p class="text-muted">UI/UX and creative design</p>
+                            <span class="badge bg-success">18 Articles</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="card text-center h-100 shadow-sm">
+                        <div class="card-body">
+                            <i class="fas fa-chart-line fa-3x text-warning mb-3"></i>
+                            <h5>Business</h5>
+                            <p class="text-muted">Entrepreneurship and growth</p>
+                            <span class="badge bg-warning">15 Articles</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="card text-center h-100 shadow-sm">
+                        <div class="card-body">
+                            <i class="fas fa-lightbulb fa-3x text-info mb-3"></i>
+                            <h5>Innovation</h5>
+                            <p class="text-muted">Future trends and ideas</p>
+                            <span class="badge bg-info">12 Articles</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h2 class="mb-4">About ModernBlog</h2>
+                    <p class="lead">We're passionate about sharing knowledge and insights that matter. Our team of expert writers covers the latest trends in technology, design, and innovation.</p>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Expert-written content</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Daily updates</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Community-driven discussions</li>
+                    </ul>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <i class="fas fa-users fa-5x text-primary opacity-75"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5><i class="fas fa-blog me-2"></i>ModernBlog</h5>
+                    <p>Your trusted source for technology, design, and innovation insights.</p>
+                    <div class="social-links">
+                        <a href="#" class="text-white me-3"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-facebook fa-lg"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-linkedin fa-lg"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-instagram fa-lg"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 mb-4">
+                    <h6>Quick Links</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white-50">Home</a></li>
+                        <li><a href="#" class="text-white-50">Articles</a></li>
+                        <li><a href="#" class="text-white-50">Categories</a></li>
+                        <li><a href="#" class="text-white-50">About</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 mb-4">
+                    <h6>Categories</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white-50">Technology</a></li>
+                        <li><a href="#" class="text-white-50">Design</a></li>
+                        <li><a href="#" class="text-white-50">Business</a></li>
+                        <li><a href="#" class="text-white-50">Innovation</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h6>Stay Updated</h6>
+                    <p class="small">Subscribe to our newsletter for the latest updates.</p>
+                    <div class="input-group">
+                        <input type="email" class="form-control" placeholder="Enter your email">
+                        <button class="btn btn-primary">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2024 ModernBlog. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="#" class="text-white-50 me-3">Privacy Policy</a>
+                    <a href="#" class="text-white-50">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
