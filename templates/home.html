@@ -48,12 +48,12 @@
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
-                                    <span class="badge bg-primary mb-2">{{f_post.title}}</span>
+                                   <span class="badge bg-primary mb-2 px-3 py-2"><a href="{% url 'single_blog' f_post.slug %}" class="text-dark text-decoration-none" style="font-size:16px;">{{ f_post.title }}</a> </span>
                                     <h3 class="card-title">{{ f_post.short_discription|truncatewords:20 }}</h3>
                                     <p class="card-text">{{ f_post.content | truncatewords:50}}</p>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <small class="text-muted">By <a href="#" class="text-decoration-none">{{ f_post.author }}</a> • {{ f_post.created_at|timesince }} ago</small>
-                                        <a href="#" class="btn btn-outline-primary btn-sm">Read More</a>
+                                        <a href="{% url 'single_blog' f_post.slug  %}" class="btn btn-outline-primary btn-sm">Read More</a>
                                     </div>
                                 </div>
                             </div>
@@ -83,7 +83,7 @@
                                 <p class="card-text">{{ f_post.content|truncatewords:30 }}</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <small class="text-muted">By <a href="#" class="text-decoration-none">{{ f_post.author }}</a> • {{ f_post.created_at|timesince }} ago</small>
-                                    <a href="#" class="btn btn-outline-success btn-sm">Continue Reading</a>
+                                    <a href="{% url 'single_blog' f_post.slug %}" class="btn btn-outline-success btn-sm">Continue Reading</a>
                                 </div>
                             </div>
                         </article>

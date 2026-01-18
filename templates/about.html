@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block hero %}
+<!-- About Hero Section -->
+<section class="hero-section bg-gradient text-white py-5">
+    <div class="container">
+        <div class="row align-items-center min-vh-50">
+            <div class="col-lg-7">
+                <h1 class="display-4 fw-bold mb-3">About ModernBlog</h1>
+                <p class="lead mb-4">
+                    A platform where ideas, technology, and innovation come together.
+                </p>
+            </div>
+            <div class="col-lg-5 text-center">
+                <i class="fas fa-users display-1 opacity-75"></i>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block content %}
+
+<!-- About Content -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+
+            <!-- Main Content -->
+            <div class="col-lg-8">
+
+                <h2 class="mb-3">Who We Are</h2>
+                <p class="fs-5 text-muted mb-4">
+                    ModernBlog is a digital publication focused on delivering high-quality
+                    articles about technology, business, design, and innovation.
+                </p>
+
+                <p class="mb-4">
+                    Our mission is to simplify complex topics and share practical knowledge
+                    that helps readers grow personally and professionally.
+                </p>
+
+                <h3 class="mt-5 mb-3">What We Write About</h3>
+                <ul class="fs-5">
+                    <li>Technology trends & tutorials</li>
+                    <li>Business & startup insights</li>
+                    <li>Design & user experience</li>
+                    <li>Future innovation & ideas</li>
+                </ul>
+
+                <h3 class="mt-5 mb-3">Our Vision</h3>
+                <p class="mb-4">
+                    We believe knowledge should be accessible, practical, and inspiring.
+                    Through ModernBlog, we aim to build a community of curious learners
+                    and creators.
+                </p>
+
+            </div>
+
+            <!-- Sidebar (same pattern as other pages) -->
+            <div class="col-lg-4">
+
+                <!-- Categories -->
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        Categories
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled mb-0">
+                            {% for cat in categories %}
+                            <li class="mb-2">
+                                <a href="{% url 'category_wise_blog' cat.id %}">
+                                    {{ cat.category_name }}
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Contact Card -->
+                <div class="card mb-4">
+                    <div class="card-header bg-info text-white">
+                        Get in Touch
+                    </div>
+                    <div class="card-body">
+                        <p class="mb-2">Have suggestions or feedback?</p>
+                        <p class="mb-0">
+                            Email us at <br>
+                            <strong>contact@modernblog.com</strong>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}

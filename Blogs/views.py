@@ -1,5 +1,6 @@
 from django.shortcuts import render , redirect , get_object_or_404
 from Blogs.models import Blog , Category
+from django.db.models import Q
 
 # Create your views here.
 
@@ -23,3 +24,26 @@ def post_detail(request, slug):
     post = get_object_or_404(Blog, slug=slug, status='Published')
     return render(request, 'post_detail.html', {'post': post})
 
+def single_blog (request , slug_name) : 
+    alone_blog = get_object_or_404(Blog, slug=slug_name, status='Published')
+    context = {
+        'alone_blog' : alone_blog , 
+    }
+    return render (request , 'single_blog.html' , context) 
+
+def search(request):
+    keyword = request.GET.get('keyword')
+    posts = []
+
+    if keyword:
+        posts = Blog.objects.filter(
+            Q(title__icontains=keyword) | 
+            Q(short_discription__icontains = keyword) | 
+            Q(content__icontains = keyword) ,
+            status='Published',
+        )
+
+    return render(request, 'search.html', {
+        'posts': posts,
+        'keyword': keyword
+    })
