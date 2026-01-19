@@ -1,6 +1,9 @@
 from django.shortcuts import render , redirect , get_object_or_404
 from Blogs.models import Blog , Category
 from django.db.models import Q
+from .forms import RegisteretionForm
+from django.contrib.auth import login , logout
+from .forms import LoginForm
 
 # Create your views here.
 
@@ -47,3 +50,36 @@ def search(request):
         'posts': posts,
         'keyword': keyword
     })
+    
+    
+
+def register(request):
+    if request.method == 'POST':
+        form = RegisteretionForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            print("USER SAVED:", user.username)
+            return redirect('register')
+        else:
+            print(form.errors)
+    else:
+        form = RegisteretionForm()
+
+    return render(request, 'registeretion.html', {'form': form})
+
+
+def user_login(request):
+    form = LoginForm()
+
+    if request.method == 'POST':
+        form = LoginForm(request, data=request.POST)
+        if form.is_valid():
+            login(request, form.get_user())
+            return redirect('home_page')   
+
+    return render(request, 'login.html', {'form': form})
+
+
+def user_logout(request):
+    logout(request)
+    return redirect('home_page')

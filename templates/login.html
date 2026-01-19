@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block hero %}
+<section class="hero-section bg-gradient text-white py-5">
+    <div class="container text-center">
+        <h1 class="fw-bold">Login</h1>
+        <p class="lead">Welcome back to ModernBlog</p>
+    </div>
+</section>
+{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5">
+
+                <div class="card shadow">
+                    <div class="card-body p-4">
+
+                        <h3 class="text-center mb-4">Sign In</h3>
+
+                        <form method="post">
+                            {% csrf_token %}
+                            {{ form|crispy }}
+                            <button type="submit" class="btn btn-primary w-100 mt-3">
+                                Register
+                            </button>
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
