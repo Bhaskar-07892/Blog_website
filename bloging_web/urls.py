@@ -23,7 +23,8 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home_page'), 
-    path('', include('Blogs.urls'))
+    path('', include('Blogs.urls')) ,
+    path('' , include('dashboard.urls')) ,
 ]
 
 if settings.DEBUG:

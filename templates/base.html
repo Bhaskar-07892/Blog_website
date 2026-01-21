@@ -13,7 +13,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 <link href="{% static 'css/blog.css'}" rel="stylesheet">
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 <!-- Theme Toggle -->
 <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle" style="z-index: 1050;">
     <button class="btn btn-primary rounded-circle p-3" id="bd-theme" type="button" data-bs-toggle="dropdown">
@@ -57,7 +57,7 @@
 
                 <!-- Auth Buttons -->
                     {% if user.is_authenticated %}
-                        <span class="text-white me-2">Hi, {{ user.username }}</span>
+                        <a href="{% url 'dashboard' %}" class="btn btn-outline-light">Dashboard</a>
                         <a href="{% url 'logout' %}" class="btn btn-outline-light">Logout</a>
                     {% else %}
                         <a href="{% url 'login' %}" class="btn btn-outline-light me-2">Login</a>
@@ -95,7 +95,7 @@
 
 <!-- Footer Part -->
 
-<footer class="bg-dark text-white py-5">
+<footer class="bg-dark text-white py-5 mt-auto">
     <div class="container">
         <div class="row">
             <div class="col-lg-4 mb-4">

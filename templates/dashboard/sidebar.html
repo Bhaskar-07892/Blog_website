@@ -1,0 +1,33 @@
+<div class="row">
+
+        <!-- ======================
+             LEFT SIDEBAR
+        ======================= -->
+        <div class="col-md-3">
+            <div class="card shadow-sm">
+                <div class="card-body p-0">
+                   <div class="nav flex-column nav-pills gap-1">
+                        <!-- Dashboard -->
+                        <a href="{% url 'dashboard' %}"
+                            class="nav-link {% if '/dashboard/' in request.path %} active bg-primary text-white {% endif %}">
+                             <i class="fas fa-tachometer-alt me-2"></i>
+                            Dashboard
+                        </a>
+
+                        <!-- Categories -->
+                        <a href="{% url 'categories' %}"
+                        class="nav-link d-flex align-items-center
+                        {% if request.path == '/categories/' %} active bg-primary text-white {% else %} text-info {% endif %}">
+                            <i class="fas fa-list me-2"></i>
+                            Categories
+                        </a>
+                        <a href="#" class="nav-link text-dark">
+                            <i class="fas fa-file-alt me-2"></i> Posts
+                        </a>
+                        <a href="{% url 'logout' %}" class="nav-link text-dark">
+                            <i class="fas fa-sign-out-alt me-2"></i> Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
