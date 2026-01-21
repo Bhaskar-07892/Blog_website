@@ -11,31 +11,35 @@
         <div class="col-md-9">
 
             <!-- Page Title -->
-            <h3 class="mb-4 fw-bold">All Categories </h3>
+            <h3 class="mb-4 fw-bold">All Posts</h3>
 
-            <a href="{% url 'add_category' %}" class="btn btn-dark text-light float-end mb-2"><i class="fas fa-plus me-1"></i>Add</a>
+            <a href="{% url 'add_post' %}" class="btn btn-dark text-light float-end mb-2"><i class="fas fa-plus me-1"></i>Add</a>
 
             <table class="table table-hover">
                 <thead>
                     <tr>
                     <th>#</th>
+                    <th>Title</th>
                     <th>Category</th>
-                    <th>Created_At</th>
-                    <th>Updated_At</th>
+                    <th>Short Discription</th>
+                    <th>Status</th>
+                    <th>Is_Featured</th>
                     <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                            {% for cat in categories %}
+                            {% for post in blog_post_all %}
                             <tr>
                                 <td>{{ forloop.counter }}</td>
-                                <td>{{ cat.category_name }}</td>
-                                <td>{{ cat.created_at|date:"M d, Y" }}</td>
-                                <td>{{ cat.updated_at|date:"M d, Y" }}</td>
+                                <td>{{ post.title }}</td>
+                                <td>{{ post.category }}</td>
+                                <td>{{ post.short_discription }}</td>
+                                <td>{{ post.status }}</td>
+                                <td>{{ post.is_featured }}</td>
                                 <td>
-                                    <a href="{% url 'edit_category' cat.id %}" class="btn btn-sm btn-outline-primary"><i class="fas fa-edit "></i></a>
+                                    <a href="{% url 'edit_post' post.id %}" class="btn btn-sm btn-outline-primary"><i class="fas fa-edit "></i></a>
                                     &nbsp;
-                                    <a href="{% url 'delete_category' cat.id %}" class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></a>
+                                    <a href="{% url 'delete_post' post.id %}" class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></a>
                                 </td>
                             </tr>
                             {% empty %}

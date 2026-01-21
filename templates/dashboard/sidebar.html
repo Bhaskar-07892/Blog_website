@@ -21,7 +21,9 @@
                             <i class="fas fa-list me-2"></i>
                             Categories
                         </a>
-                        <a href="#" class="nav-link text-dark">
+                        <a href="{% url 'posts' %}" 
+                        class="nav-link d-flex align-items-center
+                        {% if request.path == '/categories/' %} active bg-primary text-white {% else %} text-info {% endif %}">
                             <i class="fas fa-file-alt me-2"></i> Posts
                         </a>
                         <a href="{% url 'logout' %}" class="nav-link text-dark">
