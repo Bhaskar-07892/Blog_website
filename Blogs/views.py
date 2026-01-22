@@ -58,8 +58,7 @@ def register(request):
         form = RegisteretionForm(request.POST)
         if form.is_valid():
             user = form.save()
-            print("USER SAVED:", user.username)
-            return redirect('register')
+            return redirect('home_page')
         else:
             print(form.errors)
     else:

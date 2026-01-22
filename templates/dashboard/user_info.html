@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container my-5">
+    
+    {% include 'dashboard/sidebar.html' %}
+
+        <!-- ======================
+             RIGHT CONTENT
+        ======================= -->
+        <div class="col-md-9">
+
+            {% if perms.auth.view_user %}
+
+            <!-- Page Title -->
+            <h3 class="mb-4 fw-bold">All User </h3>
+
+            <a href="{% url 'add_user' %}" class="btn btn-dark text-light float-end mb-2"><i class="fas fa-plus me-1"></i>Add</a>
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                    <th>#</th>
+                    <th>FullName</th>
+                    <th>Username</th>
+                    <th>E-mail</th>
+                    <th>Active</th>
+                    <th>Staff</th>
+                    <th>Superuser</th>
+                    <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                            {% for user in users %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ user.first_name }} {{ user.last_name }}</td>
+                                <td>{{ user.username }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>{% if user.is_active %}<i class="fas fa-check text-success"></i> {% else %} <i class="fas fa-times text-danger"></i> {% endif %} </td>
+                                <td>{% if user.is_staff %}<i class="fas fa-check text-success"></i> {% else %} <i class="fas fa-times text-danger"></i> {% endif %} </td>
+                                <td>{% if user.is_superuser %}<i class="fas fa-check text-success"></i> {% else %} <i class="fas fa-times text-danger"></i> {% endif %} </td>
+                                <td>
+                                    <a href="{% url 'edit_user' user.id %}" class="btn btn-sm btn-outline-primary"><i class="fas fa-edit "></i></a>
+                                    &nbsp;
+                                    <a href="{% url 'delete_user' user.id %}" class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></a>
+                                </td>                              
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="5" class="text-center text-muted">
+                                    No categories found
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                </table>
+
+                {% else %}
+                You didn't have to access this page 
+
+                {% endif %}
+            
+         </div>
+</div>
+{% endblock %}

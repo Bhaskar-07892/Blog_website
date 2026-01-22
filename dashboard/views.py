@@ -1,15 +1,9 @@
 from django.shortcuts import get_object_or_404, redirect, render
-from Blogs.models import Blog, Category
+from Blogs.models import Blog, Category 
 from django.contrib.auth.decorators import login_required
-from .forms import CategoryForm , BlogPostForm
+from .forms import CategoryForm , BlogPostForm , AddUserForm, EditUserForm
 from django.utils.text import slugify
-
-# Example usage
-title = "Hello World! Django Slugify Example"
-slug = slugify(title)
-
-print(slug)  # Output: hello-world-django-slugify-example
-
+from django.contrib.auth.models import User
     
 # Create your views here.
 
@@ -81,8 +75,8 @@ def add_post(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
+            post.status = "Draft"
 
-            # FIRST SAVE → ID generate
             post.save()
 
             # UNIQUE SLUG with ID
@@ -118,3 +112,42 @@ def delete_post (request , pk) :
     post = get_object_or_404(Blog , pk=pk)
     post.delete() 
     return redirect('posts' )   
+
+
+def user (request) : 
+    users = User.objects.all()
+    context = {
+        'users' : users
+    }
+    return render (request , 'dashboard/user_info.html' , context)
+
+def add_user(request) : 
+    if request.method == 'POST' : 
+        form = AddUserForm(request.POST)
+        if form.is_valid() :
+            form.save()
+            return redirect('user1')
+    form = AddUserForm()
+    
+    context = {
+        'form' : form
+    }
+    return render(request , 'dashboard/add_user.html' , context)
+
+def edit_user(request , pk) : 
+    user_edit = get_object_or_404(User , pk=pk)
+    if request.method == 'POST' :
+        form = EditUserForm(request.POST , instance = user_edit) 
+        if form.is_valid:
+            form.save()
+            return redirect ('user1')
+    form = EditUserForm(instance = user_edit)
+    context = {
+        'form' : form
+    }
+    return render(request , 'dashboard/edit_user.html' , context)
+
+def delete_user(request , pk) :
+    user_delete = get_object_or_404(User , pk=pk)
+    user_delete.delete()
+    return redirect('user1')
