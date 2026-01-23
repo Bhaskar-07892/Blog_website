@@ -35,10 +35,10 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto">
-                <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="#articles">Articles</a></li>
-                <li class="nav-item"><a class="nav-link" href="#categories">Categories</a></li>
-                <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                <li class="nav-item"><a class="nav-link active" href="{% url 'home_page' %}">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'articals' %}">Articles</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'all_categories' %}">Categories</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About</a></li>
             </ul>
                 <div class="d-flex align-items-center">
 
@@ -57,7 +57,7 @@
 
                 <!-- Auth Buttons -->
                     {% if user.is_authenticated %}
-                        <a href="{% url 'dashboard' %}" class="btn btn-outline-light">Dashboard</a>
+                        {% if perms.auth.view_user %}<a href="{% url 'dashboard' %}" class="btn btn-outline-light">Dashboard</a>{% endif %}
                         <a href="{% url 'logout' %}" class="btn btn-outline-light">Logout</a>
                     {% else %}
                         <a href="{% url 'login' %}" class="btn btn-outline-light me-2">Login</a>
@@ -76,18 +76,9 @@
 
 {% endblock %}
 
-<!-- Categories Section -->
-<section id="categories" class="py-4 bg-light">
-    <div class="container">
-        <div class="nav-scroller">
-            <nav class="nav nav-underline justify-content-center">
-                {% for cat in categories %}
-                    <a class="nav-item nav-link link-body-emphasis" href="{% url 'category_wise_blog' cat.id %}">{{ cat.category_name }}</a>
-                {% endfor %}    
-            </nav>
-        </div>
-    </div>
-</section>
+{% block category %}
+
+{% endblock %}
 
 {% block content %} 
 
@@ -101,38 +92,47 @@
             <div class="col-lg-4 mb-4">
                 <h5><i class="fas fa-blog me-2"></i>ModernBlog</h5>
                 <p>Your trusted source for technology, design, and innovation insights.</p>
-                <div class="social-links">
-                    <a href="#" class="text-white me-3"><i class="fab fa-twitter fa-lg"></i></a>
-                    <a href="#" class="text-white me-3"><i class="fab fa-facebook fa-lg"></i></a>
-                    <a href="#" class="text-white me-3"><i class="fab fa-linkedin fa-lg"></i></a>
-                    <a href="#" class="text-white"><i class="fab fa-instagram fa-lg"></i></a>
-                </div>
             </div>
             <div class="col-lg-2 mb-4">
                 <h6>Quick Links</h6>
                 <ul class="list-unstyled">
-                    <li><a href="#" class="text-white-50">Home</a></li>
+                    <li><a href="{% url 'home_page' %}" class="text-white-50">Home</a></li>
                     <li><a href="#" class="text-white-50">Articles</a></li>
-                    <li><a href="#" class="text-white-50">Categories</a></li>
-                    <li><a href="#" class="text-white-50">About</a></li>
+                    <li><a href="{% url 'all_categories' %}" class="text-white-50">Categories</a></li>
+                    <li><a href="{% url 'about' %}" class="text-white-50">About</a></li>
                 </ul>
             </div>
             <div class="col-lg-2 mb-4">
                 <h6>Categories</h6>
                 <ul class="list-unstyled">
-                    <li><a href="#" class="text-white-50">Technology</a></li>
-                    <li><a href="#" class="text-white-50">Design</a></li>
-                    <li><a href="#" class="text-white-50">Business</a></li>
-                    <li><a href="#" class="text-white-50">Innovation</a></li>
+                    {% for cat in categories|slice:":4" %}
+                        <li>
+                            <a href="{% url 'category_wise_blog' cat.id %}"
+                            class="text-white-50 text-decoration-none">
+                                {{ cat.category_name }}
+                            </a>
+                        </li>
+                    {% endfor %}
                 </ul>
             </div>
+
             <div class="col-lg-4 mb-4">
                 <h6>Stay Updated</h6>
                 <p class="small">Subscribe to our newsletter for the latest updates.</p>
-                <div class="input-group">
-                    <input type="email" class="form-control" placeholder="Enter your email">
-                    <button class="btn btn-primary">Subscribe</button>
-                </div>
+                <form method="post" action="{% url 'newsletter_subscribe' %}">
+                    {% csrf_token %}
+                    <div class="input-group">
+                        <input type="email"
+                            name="email"
+                            class="form-control"
+                            placeholder="Enter your email"
+                            required>
+                        <button class="btn btn-primary" type="submit">
+                            Subscribe
+                        </button>
+                    </div>
+                </form>
+
             </div>
         </div>
         <hr class="my-4">

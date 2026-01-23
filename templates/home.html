@@ -25,150 +25,23 @@
 
 {% endblock %}
 
-{% block content %}
-
-<!-- Featured Articles -->
-<section id="articles" class="py-5">
-    <div class="container-fluid px-4">
-        <h2 class="text-center mb-5">Featured Articles</h2>
-        <div class="row g-4">
-            <div class="col-lg-9 pe-4">
-                {% for f_post in featured_posts %}
-                {% if forloop.first %}
-                    <article class="card mb-4 shadow-sm">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                {% if f_post.featured_image %}
-                                    <img src="{{ f_post.featured_image.url }}" class="card-img h-100" alt="{{ f_post.title }}" style="object-fit: cover;">
-                                {% else %}
-                                    <div class="card-img-placeholder bg-primary d-flex align-items-center justify-content-center h-100">
-                                        <i class="fas fa-image text-white fa-3x"></i>
-                                    </div>
-                                {% endif %}
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                   <span class="badge bg-primary mb-2 px-3 py-2"><a href="{% url 'single_blog' f_post.slug %}" class="text-dark text-decoration-none" style="font-size:16px;">{{ f_post.title }}</a> </span>
-                                    <h3 class="card-title">{{ f_post.short_discription|truncatewords:20 }}</h3>
-                                    <p class="card-text">{{ f_post.content | truncatewords:50}}</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <small class="text-muted">By <a href="#" class="text-decoration-none">{{ f_post.author }}</a> • {{ f_post.created_at|timesince }} ago</small>
-                                        <a href="{% url 'single_blog' f_post.slug  %}" class="btn btn-outline-primary btn-sm">Read More</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                {% endif %}
-                {% endfor %}
-
-                <div class="row">
-                    {% for f_post in featured_posts %}
-                    {% if not forloop.first %}
-                    <div class="col-md-6">
-                        <article class="card mb-4 shadow-sm">
-                            <div class="card-img-placeholder bg-success d-flex align-items-center justify-content-center" style="height: 200px;">
-                                {% if f_post.featured_image %}
-                                    <img src="{{ f_post.featured_image.url }}" class="card-img-top" alt="{{ f_post.title }}" style="height: 200px; object-fit: cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                    <div class="d-none align-items-center justify-content-center" style="height: 200px; background-color: #198754;">
-                                        <i class="fas fa-palette text-white fa-2x"></i>
-                                    </div>
-                                {% else %}
-                                    <i class="fas fa-palette text-white fa-2x"></i>
-                                {% endif %}
-                            </div>
-                            <div class="card-body">
-                                <span class="badge bg-success mb-2">{{ f_post.category }}</span>
-                                <h5 class="card-title">{{ f_post.short_discription | truncatewords:20 }}</h5>
-                                <p class="card-text">{{ f_post.content|truncatewords:30 }}</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <small class="text-muted">By <a href="#" class="text-decoration-none">{{ f_post.author }}</a> • {{ f_post.created_at|timesince }} ago</small>
-                                    <a href="{% url 'single_blog' f_post.slug %}" class="btn btn-outline-success btn-sm">Continue Reading</a>
-                                </div>
-                            </div>
-                        </article>
-                    </div>
-                    {% endif %}
-                    {% endfor %}
-                </div>
-            </div>
-
-            <!-- Right Sidebar -->
-            <div class="col-lg-3 ps-4 pe-5">
-                <div class="card mb-4">
-                    <div class="card-header bg-primary text-white">
-                        <h5 class="mb-0"><i class="fas fa-fire me-2"></i>Trending Now</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="trending-item mb-3 pb-3 border-bottom">
-                            <h6 class="mb-1">AI Revolution in 2024</h6>
-                            <small class="text-muted">1.2k views</small>
-                        </div>
-                        <div class="trending-item mb-3 pb-3 border-bottom">
-                            <h6 class="mb-1">Sustainable Tech Solutions</h6>
-                            <small class="text-muted">980 views</small>
-                        </div>
-                        <div class="trending-item">
-                            <h6 class="mb-1">Remote Work Best Practices</h6>
-                            <small class="text-muted">756 views</small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card mb-4">
-                    <div class="card-header bg-info text-white">
-                        <h5 class="mb-0"><i class="fas fa-clock me-2"></i>Recent Posts</h5>
-                    </div>
-                    <div class="card-body">
-                        {% for post in posts %}
-                        <div class="d-flex mb-3 pb-3 border-bottom">
-                            <div class="flex-shrink-0 me-3">
-                                {% if post.featured_image %}
-                                    <img src="{{ post.featured_image.url }}" class="rounded" style="width: 60px; height: 60px; object-fit: cover;" alt="{{ post.title }}">
-                                {% else %}
-                                    <div class="bg-primary rounded" style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;">
-                                        <i class="fas fa-image text-white"></i>
-                                    </div>
-                                {% endif %}
-                            </div>
-                            <div>
-                                <h6 class="mb-1">{{ post.title }}</h6>
-                                <small class="text-muted">{{ post.created_at|timesince }} ago</small>
-                            </div>
-                        </div>
-                        {% endfor %}
-                    </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Pagination -->
-                <nav class="d-flex justify-content-center mt-4" aria-label="Blog pagination">
-                    <div class="btn-group" role="group">
-                        <a class="btn btn-outline-primary rounded-pill me-2" href="#">← Older Posts</a>
-                        <a class="btn btn-outline-secondary rounded-pill disabled" aria-disabled="true">Newer Posts →</a>
-                    </div>
-                </nav>
-
-                <!-- Social Links -->
-                <div class="d-flex justify-content-end">
-                    <div class="card mb-4 mt-4" style="max-width: 270px;">
-                        <div class="card-header bg-dark text-white py-2">
-                            <h5 class="mb-0"><i class="fas fa-share-alt me-2"></i>Follow Us</h5>
-                        </div>
-                        <div class="card-body py-3">
-                            <div class="d-flex justify-content-around">
-                                <a href="#" class="btn btn-outline-dark" style="font-size: 1.05rem; padding: 0.3rem 0.6rem;"><i class="fab fa-github"></i></a>
-                                <a href="#" class="btn btn-outline-info" style="font-size: 1.05rem; padding: 0.3rem 0.6rem;"><i class="fab fa-twitter"></i></a>
-                                <a href="#" class="btn btn-outline-primary" style="font-size: 1.05rem; padding: 0.3rem 0.6rem;"><i class="fab fa-facebook"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+{% block category %}
+<!-- Categories Section -->
+<section id="categories" class="py-4 bg-light">
+    <div class="container">
+        <div class="nav-scroller">
+            <nav class="nav nav-underline justify-content-center">
+                {% for cat in categories %}
+                    <a class="nav-item nav-link link-body-emphasis" href="{% url 'category_wise_blog' cat.id %}">{{ cat.category_name }}</a>
+                {% endfor %}    
+            </nav>
         </div>
     </div>
 </section>
+
+{% endblock %}
+
+{% block content %}
 
 <!-- Categories -->
 <section id="categories" class="py-5 bg-light">

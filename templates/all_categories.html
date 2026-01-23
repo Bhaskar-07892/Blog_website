@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block hero %}
+<section class="hero-section bg-gradient text-white py-5">
+    <div class="container text-center">
+        <h1 class="fw-bold">All Categories</h1>
+        <p class="lead">Browse blogs by category</p>
+    </div>
+</section>
+{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <div class="row g-4">
+
+            {% for cat in categories %}
+            <div class="col-md-3 col-sm-6">
+                <a href="{% url 'category_wise_blog' cat.id %}"
+                   class="text-decoration-none">
+
+                    <div class="card shadow-sm h-100 text-center">
+                        <div class="card-body">
+                            <i class="fas fa-folder-open fa-3x text-primary mb-3"></i>
+                            <h5 class="text-dark">
+                                {{ cat.category_name }}
+                            </h5>
+                        </div>
+                    </div>
+
+                </a>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center text-muted">
+                No categories found
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
+{% endblock %}
