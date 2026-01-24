@@ -1,5 +1,6 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render , redirect , get_object_or_404
-from Blogs.models import Blog , Category
+from Blogs.models import Blog , Category , CommentModel
 from django.db.models import Q
 from .forms import RegisteretionForm
 from django.contrib.auth import login , logout
@@ -32,8 +33,20 @@ def post_detail(request, slug):
 
 def single_blog (request , slug_name) : 
     alone_blog = get_object_or_404(Blog, slug=slug_name, status='Published')
+    if request.method == 'POST' : 
+        comment = CommentModel()
+        comment.user = request.user
+        comment.blog = alone_blog
+        comment.comment = request.POST['comment']
+        comment.save()
+        return HttpResponseRedirect(request.path_info)
+    
+    comments = CommentModel.objects.filter(blog = alone_blog)
+    total_comments = CommentModel.objects.count()
     context = {
         'alone_blog' : alone_blog , 
+        'comments' : comments , 
+        'total_comments' : total_comments
     }
     return render (request , 'single_blog.html' , context) 
 

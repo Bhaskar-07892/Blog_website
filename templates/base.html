@@ -119,19 +119,22 @@
             <div class="col-lg-4 mb-4">
                 <h6>Stay Updated</h6>
                 <p class="small">Subscribe to our newsletter for the latest updates.</p>
-                <form method="post" action="{% url 'newsletter_subscribe' %}">
-                    {% csrf_token %}
-                    <div class="input-group">
-                        <input type="email"
-                            name="email"
-                            class="form-control"
-                            placeholder="Enter your email"
-                            required>
-                        <button class="btn btn-primary" type="submit">
-                            Subscribe
-                        </button>
-                    </div>
-                </form>
+                {% if user.is_authenticated %}
+                    {% if is_subscribed %}
+                        <p class="text-success">
+                            ✅ You are subscribed with {{ user.email }}
+                        </p>
+                    {% else %}
+                        <form method="post" action="{% url 'newsletter_subscribe' %}">
+                            {% csrf_token %}
+                            <button class="btn btn-primary w-100">
+                                Subscribe
+                            </button>
+                        </form>
+                    {% endif %}
+                {% else %}
+                    <p>Please login to subscribe</p>
+                {% endif %}
 
             </div>
         </div>
