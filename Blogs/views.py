@@ -26,29 +26,34 @@ def category_wise_blog(request, category_id):
 
     return render(request, 'category_wise_blog.html', context)
 
+from Blogs.models import Blog, CommentModel
 
-def post_detail(request, slug):
-    post = get_object_or_404(Blog, slug=slug, status='Published')
-    return render(request, 'post_detail.html', {'post': post})
+def single_blog(request, slug_name):
+    blog = get_object_or_404(Blog, slug=slug_name, status='Published')
 
-def single_blog (request , slug_name) : 
-    alone_blog = get_object_or_404(Blog, slug=slug_name, status='Published')
-    if request.method == 'POST' : 
-        comment = CommentModel()
-        comment.user = request.user
-        comment.blog = alone_blog
-        comment.comment = request.POST['comment']
-        comment.save()
-        return HttpResponseRedirect(request.path_info)
-    
-    comments = CommentModel.objects.filter(blog = alone_blog)
-    total_comments = CommentModel.objects.count()
+    comments = CommentModel.objects.filter(blog=blog).order_by('-created_at')
+    comment_count = comments.count()
+
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            comment_text = request.POST.get('comment')
+
+            if comment_text:
+                CommentModel.objects.create(
+                    user=request.user,
+                    blog=blog,
+                    comment=comment_text
+                )
+                return redirect(request.path)
+        else:
+            return redirect('login')
+
     context = {
-        'alone_blog' : alone_blog , 
-        'comments' : comments , 
-        'total_comments' : total_comments
+        'alone_blog': blog,
+        'comments': comments,
+        'comment_count': comment_count
     }
-    return render (request , 'single_blog.html' , context) 
+    return render(request, 'single_blog.html', context)
 
 def search(request):
     keyword = request.GET.get('keyword')
