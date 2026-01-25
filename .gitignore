@@ -8,7 +8,6 @@
 __pycache__/
 local_settings.py
 db.sqlite3-journal
-email_host_password.py
 .env
 
 

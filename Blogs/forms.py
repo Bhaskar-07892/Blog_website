@@ -4,9 +4,6 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit
 from django.contrib.auth.forms import AuthenticationForm
 
-from django import forms
-from .models import NewsletterSubscriber
-
 
 class RegisteretionForm (UserCreationForm):
 
@@ -39,14 +36,3 @@ class LoginForm(AuthenticationForm):
             'password',
             Submit('submit', 'Login', css_class='btn btn-primary w-100 mt-3')
         )
-        
-class NewsletterForm(forms.ModelForm):
-    class Meta:
-        model = NewsletterSubscriber
-        fields = ['email']
-        widgets = {
-            'email': forms.EmailInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Enter your email'
-            })
-        }

@@ -1,14 +1,9 @@
-from django.http import HttpResponseRedirect
 from django.shortcuts import render , redirect , get_object_or_404
 from Blogs.models import Blog , Category , CommentModel
 from django.db.models import Q
 from .forms import RegisteretionForm
 from django.contrib.auth import login , logout
-from django.core.mail import send_mail
-from django.contrib import messages
-from .forms import LoginForm , NewsletterForm 
-from .email_host_password import Email_Host_Password , Email_Sender
-
+from .forms import LoginForm 
 # Create your views here.
 
 def category_wise_blog(request, category_id):
@@ -103,25 +98,3 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect('home_page')
-
-def newsletter_subscribe(request):
-    if request.method == 'POST':
-        form = NewsletterForm(request.POST)
-
-        if form.is_valid():
-            subscriber = form.save()
-
-            # Confirmation email
-            send_mail(
-                subject='Thanks for subscribing!',
-                message='You are successfully subscribed to ModernBlog 🎉',
-                from_email=Email_Sender,
-                recipient_list=[subscriber.email],
-                fail_silently=False,
-            )
-
-            messages.success(request, "Subscription successful! Check your email.")
-        else:
-            messages.error(request, "Invalid or already subscribed email.")
-
-    return redirect(request.META.get('HTTP_REFERER'))
